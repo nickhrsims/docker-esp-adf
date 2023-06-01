@@ -5,6 +5,7 @@ FROM nickhrsims/development-base:ubuntu-22.04
 RUN apt-get update
 RUN apt-get install -y \
     gcc                \
+    cmake              \
     libusb-1.0-0       \
     &&                 \
     apt-get clean
@@ -25,6 +26,7 @@ RUN $IDF_PATH/install.sh
 RUN echo 'export ADF_PATH=/opt/esp-adf' >> $HOME/.zshenv
 RUN echo 'export IDF_PATH=$ADF_PATH/esp-idf' >> $HOME/.zshenv
 RUN echo 'source $IDF_PATH/export.sh' >> $HOME/.zshrc
+RUN git config --global --add safe.directory /opt/esp-adf/esp-idf
 
 USER root
 WORKDIR $HOME
